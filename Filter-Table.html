@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <form class="ms-3 mt-3 w-50">
+        <input type="text" id="searchbar" class="form-control shadow-sm" placeholder="Search Here">
+    
+        <select  name="category" id="category" class="form-select mt-3 mb-3 shadow-sm">
+            <option value="0" selected hidden>Select Category</option>
+            <option value="1">ID</option>
+            <option value="2">Name</option>
+            <option value="3">Country</option>
+            <option value="4">Abilities</option>
+        </select>
+    </form>
+
+    <table id="tbl1" class="table table-striped table-bordered table-dark w-50 ms-3 mt-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Abilities</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody1">
+            <tr>
+                <td>104</td>
+                <td>Goku</td>
+                <td>japan</td>
+                <td>monster strength, martial arts, flying</td>
+            </tr>
+            <tr>
+                <td>201</td>
+                <td>Superman</td>
+                <td>USA</td>
+                <td>laser sight, great strength, flying</td>
+            </tr>
+            <tr>
+                <td>145</td>
+                <td>Wonder Woman</td>
+                <td>USA</td>
+                <td>strength, speed, flying</td>
+            </tr>
+            <tr>
+                <td>244</td>
+                <td>Batman</td>
+                <td>USA</td>
+                <td>money, iq, martial arts</td>
+            </tr>
+            <tr>
+                <td>221</td>
+                <td>Bulma</td>
+                <td>Japan</td>
+                <td>money, science, iq</td>
+            </tr>
+            <tr>
+                <td>273</td>
+                <td>Kirikou</td>
+                <td>Cameroon</td>
+                <td>wise, intelligent, solver</td>
+            </tr>
+            <tr>
+                <td>108</td>
+                <td>Edward elrick</td>
+                <td>japan</td>
+                <td>state achemist, martial arts, persevering</td>
+            </tr>
+            <tr>
+                <td>142</td>
+                <td>cobra</td>
+                <td>japan</td>
+                <td>canon of delta, martial arts</td>
+            </tr>
+            <tr>
+                <td>112</td>
+                <td>Gohan</td>
+                <td>japan</td>
+                <td>iq, martial arts, strength</td>
+            </tr>
+            <tr>
+                <td>433</td>
+                <td>Videl</td>
+                <td>japan</td>
+                <td>martial arts, flying</td>
+            </tr>
+            <tr>
+                <td>223</td>
+                <td>Trunks</td>
+                <td>japan</td>
+                <td>martial arts, strength</td>
+            </tr>
+            <tr>
+                <td>311</td>
+                <td>Starfire</td>
+                <td>USA</td>
+                <td>Healing, flying, laser sight</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        //getting the references
+        let searchbar = document.getElementById('searchbar');
+        let category = document.getElementById('category');
+        let tbody = document.getElementById('tbody1');
+        let originalTableData = tbody.innerHTML;
+
+        //search function
+        function Search() {
+            tbody.innerHTML = originalTableData;
+            let rows = tbody.children; // all of the tr tags
+
+            //do not filter data if searchbar is empty or first option is selected
+            if(searchbar.value.length < 1 || category.value == '0'){
+                return;
+            }
+
+            let filteredrows = '';
+            let catno = Number(category.value) - 1;
+            let searchtext = searchbar.value.toLowerCase();
+
+            for(let i = 0; i < rows.length; i++) {
+                const currentrowtext = rows[i].children[catno].innerHTML.toLowerCase(); //assigning current tr's td (accoring to the category selected) 
+                
+                if(currentrowtext.indexOf(searchtext) > - 1){
+                    filteredrows += rows[i].outerHTML; //current tr
+                }
+            }
+            tbody.innerHTML = filteredrows;
+
+        }
+
+        searchbar.addEventListener('input', Search);
+
+        
+
+        
+    </script>
+</body>
+</html>
